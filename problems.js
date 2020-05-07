@@ -116,3 +116,34 @@ const printUnorderedPairs = (arr) => {
 console.log(printUnorderedPairs([2, 4, 6]));
 
 //=================================================================
+
+/* 
+
+Example 5: O(N*M) Time
+
+* It is an extremely common mistake to think this is O(N²) Time because of the 2 for loops.
+
+But the loops each take a different array. 
+
+If N is the arr1.length & M is the arr2.length, the work done is 
+O(N*M) or O(NM);
+
+
+*/
+
+const printUnorderedPairs2Arrays = (arr1, arr2) => {
+  let finalSet = ['printed unordered pairs from 2 arrays:'];
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] < arr2[j]) {
+        finalSet.push(arr1[i] + ', ' + arr2[j]);
+      }
+    }
+  }
+  return finalSet;
+};
+
+console.log(printUnorderedPairs2Arrays([1, 2, 3], [1, 2, 3]));
+console.log(printUnorderedPairs2Arrays([1, 2, 3], [4, 5, 6]));
+
+//=================================================================
