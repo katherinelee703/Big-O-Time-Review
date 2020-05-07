@@ -6,4 +6,4 @@
 
 These problems are not part of the 189 advertised interview prep problems, but are the examples from the Big O Time and Space Complexity chapter.
 
-I have taken all examples (originally written in Java) from this chapter, re-worked them into JavaScript, solved them, and included comments on their respective Big O times.
+I have taken all examples (originally written in Java) from this chapter, re-worked them into JavaScript, solved them, and included comments on their respective Big O Times.
