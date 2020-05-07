@@ -9,9 +9,9 @@ please see: https://repl.it/@khd25/CtCI-Big-O-Chapter-Examples to run them more 
 
 ====================================================================
 
-Example 1:  O(2^N) Time
+Example 1:  O(2ⁿ) Time
 
-Generally when you have a recursive function that makes multiple calls, the runtime will often (but not always) look like: O(branches^depth), where branches is the number of times each recursive call branches. in this case, the example is O(2^N)
+Generally when you have a recursive function that makes multiple calls, the runtime will often (but not always) look like: O(branchesᵈᵉᵖᵗʰ), where branches is the number of times each recursive call branches. in this case, the example is O(2ⁿ)
 
 */
 
@@ -42,7 +42,7 @@ Example 2: O(N) Time
 
 The fact that we iterate through the array twice doesn't matter. 
 It is really N + N, so 2N, but in Big O, we drop the constants. 
-So it is just O(N)
+∴ it is just O(N)
 
 */
 
@@ -61,5 +61,30 @@ const sumAndProduct = (arr) => {
 };
 
 sumAndProduct([1, 2, 3]);
+
+//=================================================================
+
+/* 
+
+Example 3: O(N²) Time
+
+The inner for loop runs N times for every N times of the outer for loop. 
+∴ the runtime is O(N^2) Time
+
+{Generally, nested for loops on arrays of the same length will be O(N²)}
+
+*/
+
+const printPairsAllowRepeats = (arr) => {
+  let finalSet = ['printed pairs:'];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      finalSet.push(arr[i] + ', ' + arr[j]);
+    }
+  }
+  return finalSet;
+};
+
+console.log(printPairsAllowRepeats([1, 3, 5]));
 
 //=================================================================
