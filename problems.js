@@ -88,3 +88,31 @@ const printPairsAllowRepeats = (arr) => {
 console.log(printPairsAllowRepeats([1, 3, 5]));
 
 //=================================================================
+
+/* 
+
+Example 4: another O(N²) Time
+
+A quick trick is to see that there are nested for loops.
+But the loops are different lengths.
+Ultimately, there are N² total pairs. 
+Roughly half will have j > i.
+So O(N² / 2). or O(1/2 N²). 
+Basically it looks like half/skinny version of an N x N matrix right?
+Drop the constant and it's still O(N²).
+
+*/
+
+const printUnorderedPairs = (arr) => {
+  let finalSet = ['printed unordered pairs:'];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      finalSet.push(arr[i] + ', ' + arr[j]);
+    }
+  }
+  return finalSet;
+};
+
+console.log(printUnorderedPairs([2, 4, 6]));
+
+//=================================================================
