@@ -410,3 +410,102 @@ for (const element of array1) {
 */
 
 //=================================================================
+
+/* 
+
+Example 14: O(2^N) Time - Find the Nth Fibonacci Number
+
+Generally speaking, when you're looking at an algorithm with multiple recursive calls, you'll end up with exponential runtime
+
+Remember the rule of thumb -> O(branches^depth) -> O(2^N)
+
+*/
+
+function fib(num) {
+  if (num <= 0) return 0;
+  else if (num === 1) return 1;
+  return fib(num - 1) + fib(num - 2);
+}
+
+console.log(
+  'Nth Fibonacci Number (counting from 0, not 1, like Nth index of fib nums): ',
+  fib(6)
+);
+
+//0, 1, 1, 2, 3, 5, 8, 13.... fib nums
+//0, 1, 2, 3, 4, 5, 6, 7..... indexes
+
+//=================================================================
+
+/* 
+
+Example 15: O(2^N) Time - Print all Fibonacci Numbers from 0 to num
+
+console.log is doing constant work
+it is calling the same amount of things as fib -- so it is also 
+O(2^N)
+
+*/
+
+function printAllFib(num) {
+  for (let i = 0; i < num; i++) {
+    console.log("fib num's index: " + i + ', fib num: ' + fib(i));
+  }
+}
+
+printAllFib(7);
+
+//=================================================================
+
+/* 
+
+Example 16: O(N) Time - BETTER Print all Fibonacci Numbers from 0 to num 
+USING CACHING!!
+
+MEMOization is a very common optimization technique for exponential runtime recursive algorithms
+
+Look at what the code below does:
+
+fib(1) -> return 1
+fib(2)
+      fib(1) -> return 1
+      fib(0) -> return 0   // 1 + 0 = 1
+      store 1 at memo[2]
+fib(3)
+      fib(2) -> lookup memo[2] -> return 1
+      fib(1) -> return 1                    // 1 + 1 = 2
+      store 2 at memo[3]
+fib(4)
+      fib(3) -> lookup memo[3] -> return 2
+      fib(2) -> lookup memo[2] -> return 1  // 2 + 1 = 3
+      store 3 at memo[4]
+fib(5)
+      fib(4) -> lookup memo[4] -> return 3
+      fib(3) -> lookup memo[3] -> return 2 // 3 + 2 = 5
+      store 5 at memo[5]
+
+
+For each call up to fib(i) we have already computed and stored the values for fib(i-1) and fib(i-2) in a constant lookup time memo (a cache). We will do a constant amount of work for N times 
+
+∴ O(N)
+
+*/
+
+function allFib(num) {
+  let memo = [num + 1];
+  for (let i = 0; i < num; i++) {
+    console.log('memo fib index: ' + i + ', fib num: ' + fib(i, memo));
+  }
+}
+
+function fibMemo(num, memo) {
+  if (num <= 0) return 0;
+  else if (num === 1) return 1;
+  else if (memo[num] > 0) return memo[num];
+  memo[num] = fibMemo(num - 1, memo) + fibMemo(num - 2, memo);
+  return memo[num];
+}
+
+allFib(7);
+
+//=================================================================
