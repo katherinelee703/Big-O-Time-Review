@@ -267,3 +267,131 @@ console.log('modddd', 3 % 10);
 console.log('sum of digits: ', sumDigits(345)); //12
 
 //=================================================================
+
+/* 
+
+BONUS Example 11: O(kc^k) Time - Print Sorted Strings
+
+The following code prints all strings of length K where the characters are in sorted order. It does this by generating all strings of length K and then checking if each is sorted. What is the runtime?
+
+O(kc^k), where k is the length of the string, and c is the number of characters in the alphabet.
+It takes O(c^k) time to generate each string
+Then we have to check that each of these strings is sorted (we are not sorting them, we are just checking IF they ARE sorted already, worst case is you have to check till the last letter, k, the length of the string), so this check takes O(k) time.
+
+Which means the total is c^k * k, or O(kc^k) time.
+
+*/
+
+let numChars = 26;
+
+function printSortedStrings(remaining) {
+  printSortedStringss(remaining, '');
+}
+
+function printSortedStringss(remaining, prefix) {
+  if (remaining === 0) {
+    if (isInOrder(prefix)) {
+      console.log(prefix);
+    } else {
+      for (let i = 0; i < numChars; i++) {
+        let char = ithLetter(i);
+        console.log(remaining - 1, prefix + char);
+      }
+    }
+  }
+  function isInOrder(str) {
+    for (let i = 0; i < str.length; i++) {
+      let prev = ithLetter(str.charAt(i - 1));
+      let current = ithLetter(str.charAt(i));
+      if (prev > current) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function ithLetter(i) {
+    return i;
+  }
+}
+// currently this code doesn't work???
+console.log('print sorted strings: ', printSortedStrings('hello'));
+// not sure how to translate this code from java to js???
+
+//=================================================================
+
+/* 
+
+BONUS Example 12: O(b log b + a log b) Time, INTERSECTION OF 2 ARRAYS
+
+The following code computes the intersection (the number of elements in common) of two arrays. It assumes that neither array has duplicates. It computes the intersection by sorting one array (array b) and then interating through array a checking (via Binary Search) if each value is in B. Runtime?
+
+First we have to sort array b, which takes O(b log b) time.
+Next, for each element in a, we do a binary search in O(log b) time -> this means that it is a * log b. 
+Put these 2 parts together and you get b log b + a log b.
+Therefore O(b log b + a log b) time... doesn't reduce further
+
+*/
+
+// Merge Sort Implentation (Recursion)
+// Helper Func for Intersection
+
+function mergeSort(unsortedArray) {
+  // No need to sort the array if the array only has one element or empty
+  if (unsortedArray.length <= 1) {
+    return unsortedArray;
+  }
+  // In order to divide the array in half, we need to figure out the middle
+  const middle = Math.floor(unsortedArray.length / 2);
+
+  // This is where we will be dividing the array into left and right
+  const left = unsortedArray.slice(0, middle);
+  const right = unsortedArray.slice(middle);
+
+  // Using recursion to combine the left and right
+  return mergeSort(mergeSort(left), mergeSort(right));
+}
+
+const binarySearch = (array, target) => {
+  let startIndex = 0;
+  let endIndex = array.length - 1;
+  while (startIndex <= endIndex) {
+    let middleIndex = Math.floor((startIndex + endIndex) / 2);
+    if (target === array[middleIndex]) {
+      return array[middleIndex];
+    }
+    if (target > array[middleIndex]) {
+      console.log('Searching the right side of Array');
+      startIndex = middleIndex + 1;
+    }
+    if (target < array[middleIndex]) {
+      console.log('Searching the left side of array');
+      endIndex = middleIndex - 1;
+    } else {
+      console.log('Not Found this loop iteration. Looping another iteration.');
+    }
+  }
+
+  console.log('Target value not found in array');
+};
+
+function intersection(a, b) {
+  let newB = mergeSort(b);
+  let intersects = 0;
+  for (let x of a) {
+    if (binarySearch(newB, x) >= 0) {
+      intersects++;
+    }
+  }
+  return intersects;
+}
+// not sure how to translate java to js here, so this doesn't work now...
+console.log('intersection two-sum?:', intersection([1, 2, 3, 4], [2, 3, 4, 5]));
+
+//======
+
+// this is the only way *I* know how to find intersections
+function intersect(array1, array2) {
+  return array1.filter((value) => array2.includes(value));
+}
+// this works!
+console.log('intersect: ', intersect([1, 2, 3], [2, 3, 4, 5]));
