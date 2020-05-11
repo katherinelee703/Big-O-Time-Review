@@ -244,3 +244,74 @@ You get O(a*s(log a + log s)). You cannot simplify it further.
 */
 
 //=================================================================
+
+/* 
+
+Example 10: O(N) Time - with Nodes & Binary Search Tree
+
+*Just because this is a BST doesn't mean there'll be a log in it!
+
+Think of it as this code touching each node in the tree once, and it does a constant amount of work each time it touches a node (excluding the recursive calls).
+Since the runtime is linear for each node, if there are N nodes, then runtime is O(N)
+
+Let's look more (the below explanation is really complex tho. Just use the above one, it makes easier sense):
+
+In Example 0 we said normally runtime for recursive functions have multiple branches - and it is usually O(branches^depth). When there are 2 branches we have 0(2^N); yikes that seems bad!
+
+So, we have to look at what it's exponential with respect to...
+
+What is depth? A balanced BST will have a depth of roughly log NM
+
+So, using O(branches^depth) we get O(2^log N);
+
+Let's refer to circle method to see what log base 2 means:
+
+2^P = Q    ->    log₂Q = pairs
+
+Have P = 2^log N
+      -> log₂P = log₂N
+      -> P = N
+      => 2^log N = N
+      wow math.
+
+Therefore runtime is O(N), where N is number of nodes.
+
+*/
+
+function sum(node) {
+  if (node == null) {
+    return 0;
+  }
+  return sum(node.left) + node.value + sum(node.right);
+}
+
+//=================================================================
+
+/* 
+
+Example 11: O(√N) Time - Prime Number Teller
+
+We know that the work inside the loop is constant time.
+We need to know then how many iterations the loop will run for in the worst case scenario.
+
+The for loop will start at 2, and will stop when x * x = num.
+This is the same as saying the iterations will stop once they have iterated the √ of N times. 
+
+That is why this is O(√N)
+
+
+*/
+
+function isPrime(num) {
+  for (let x = 2; x * x <= num; x++) {
+    //this is key: x * x <= num...
+    if (num % x === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log('isPrime: ', isPrime(587));
+
+//=================================================================
