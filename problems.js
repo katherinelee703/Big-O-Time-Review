@@ -315,3 +315,98 @@ function isPrime(num) {
 console.log('isPrime: ', isPrime(587));
 
 //=================================================================
+
+/* 
+
+Example 12: O(N) Time - Factorials!
+
+This recursion is "straight"
+ie, it will run N number of times, where N = num
+so its from n to n-1, to n-2 .... down until 1. 
+∴ O(N) 
+
+*/
+
+function factorial(num) {
+  if (num < 0) {
+    return -1;
+  } else if (num === 0) {
+    return 1;
+  } else {
+    return num * factorial(num - 1);
+  }
+}
+
+console.log(factorial(4)); //this computes 4! or (4 * 3 * 2 * 1)...
+
+//=================================================================
+
+/* 
+
+Example 13: O(n^2 * n!) Time - String Permutations
+
+Step 1: find how many possible permutations (calling base case):
+For a 7 letters word, on the 1st try you pick from 7 letters, 
+on the 2nd try you pick from 6 letters, ....
+The number of permutations is 7! (7 factorial)
+
+Step 2: We need to count the number of times permutation is called (not in the base case)
+So if the # of permutations is 7!, we can picture a call tree.
+There are n! leaves on the tree. Each leaf is attached to a path of length n.
+∴ We know there will be no more than n * n! nodes (function calls) in this tree.
+
+Add O(n) work because each character needs to be printed
+
+Add  O(n) workc due to the string concatenation. Observe the the sum of the lengths of remainder, prefix, and str.charAt(i) will always be n.
+
+Each Node in the call tree ∴ corresponds to O(n) work
+So far it is O(n*n*n!), this can be simplified to
+
+O(n^2 * n!) runtime
+
+*/
+
+let findPermutations = (string) => {
+  if (!string || typeof string !== 'string') {
+    return 'Please enter a string';
+  }
+
+  if (!!string.length && string.length < 2) {
+    return string;
+  }
+
+  let permutationsArray = [];
+
+  for (let i = 0; i < string.length; i++) {
+    let char = string[i];
+
+    if (string.indexOf(char) != i) continue; //this deletes duplicates, because if a character happens again, .indexOf(char) will find the first index (instance) of that character, and if it doesn't match i, it will go on to the next letter, thus almost halving the output when you have repeater characters in the input string as compared to not adding this line.
+
+    let remainder = string.slice(0, i) + string.slice(i + 1);
+
+    for (let permutation of findPermutations(remainder)) {
+      permutationsArray.push(char + permutation);
+    }
+  }
+  return permutationsArray;
+};
+
+console.log('permutations: ', findPermutations('aabc'));
+
+/*
+
+* NOTE: MDN Definition of "For... Of Loops":
+
+const array1 = ['a', 'b', 'c'];
+
+for (const element of array1) {
+  console.log(element);
+}
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c" 
+
+*/
+
+//=================================================================
