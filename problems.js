@@ -512,7 +512,7 @@ allFib(7);
 
 /* 
 
-Example 16: O(log N) Time - Print Powers of 2 from 1 to num
+Example 17: O(log N) Time - Print Powers of 2 from 1 to num
 
 Since we will call recursively every time we divide num in half, that leads us to log N time. 
 It does constant work on every call, so don't need to add any more N.
