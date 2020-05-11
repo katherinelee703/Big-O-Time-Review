@@ -147,3 +147,55 @@ console.log(printUnorderedPairs2Arrays([1, 2, 3], [1, 2, 3]));
 console.log(printUnorderedPairs2Arrays([1, 2, 3], [4, 5, 6]));
 
 //=================================================================
+
+/* 
+
+Example 6: another O(N*M) Time
+
+Compared to Example 5, nothing has really changed here. 
+The K loop is doing "constant work" - it just does same task for every J loop.
+Even though it looks like it ought to be O(10*N*M), we drop constants.
+It is still O(N*M)
+
+*/
+
+const printUnorderedPairs2Arrays3Loops = (arr1, arr2) => {
+  let finalSet = ['printed unordered pairs from 2 arrays weird:'];
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      for (let k = 0; k < 10; k++) {
+        finalSet.push(arr1[i] + ', ' + arr2[j]);
+      }
+    }
+  }
+  return finalSet;
+};
+
+console.log(printUnorderedPairs2Arrays3Loops([1, 2, 3], [1, 2, 3]));
+
+//=================================================================
+
+/* 
+
+Example 7: O(N) Time
+
+Although this for loop will only run for half of the array length 
+it is still O(N) time. because O(1/2N) drops constant to be O(N)
+
+*/
+
+const reverseHalf = (arr) => {
+  let final = [];
+  for (let i = 0; i < arr.length / 2; i++) {
+    let other = arr.length - i - 1;
+    let temp = arr[i];
+    arr[i] = arr[other];
+    arr[other] = temp;
+    final.push(arr[i]);
+  }
+  return final;
+};
+
+console.log('reverse half an array: ', reverseHalf([1, 2, 3, 4, 5, 6]));
+
+//=================================================================
