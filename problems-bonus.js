@@ -157,3 +157,38 @@ function sqr_root(n) {
 console.log('sqr_root: ', sqr_root(9));
 
 //=================================================================
+
+/* 
+
+BONUS Example 7: O(N) Time - Unbalanced BST
+
+If a binary search tree is not balance, what is the worse case run time to find an element in the tree?
+
+The worst case is that the thing you are looking for is in the very very last of the bottom leaf nodes. 
+If the BST is unbalanced to the most extreme degree, it would take O(n) time, 
+where n is the total number of nodes in that tree.
+
+*/
+
+//=================================================================
+
+/* 
+
+BONUS Example 8: O(N) Time -  Binary Tree vs BST
+
+You are looking for a specific value in a Binary Tree, but the tree is NOT a binary search tree. 
+What is the time complexity of this?
+
+NOTE:
+Binary Tree: any node will have at most 2 child nodes.
+It is not necessarily sorted in number order.
+
+BST: any node on a left-half subtree is less than root node, 
+any node on a right-half substree is greater than root node.
+
+Again, in the worst case, you'd maybe end up searching through every single node since they are not guaranteed to be in any particular order. 
+This would be O(n) time.
+
+*/
+
+//=================================================================
