@@ -192,3 +192,78 @@ This would be O(n) time.
 */
 
 //=================================================================
+
+/* 
+
+BONUS Example 9: O(n^2) Time - Append To New (by making new array)
+
+The appendToNew method appends a value to an array by creating a new, longer array, and returning this longer array. You've used the appendToNew method to create a copyArray function that repeatedly calls appendToNew. How long does copying an array take? O(n^2) where n is length of array. 1st call to appendToNew takes 1 copy. The 2nd call takes 2 copies, 3rd call takes 3 copies... the total time will be the sum of 1....n which is actually n^2
+
+*/
+
+function copyArray(array) {
+  let copy = [];
+  for (let value of array) {
+    copy = appendToNew(copy, value);
+  }
+  return copy;
+}
+
+function appendToNew(array, value) {
+  //copy all elements over to new array
+  let bigger = [];
+  for (let i = 0; i < array.length; i++) {
+    bigger[i] = array[i];
+  }
+
+  //add new element
+  bigger[bigger.length] = value; // or bigger.push(value);
+  return bigger;
+}
+
+console.log('copyArray calling appendToNew: ', copyArray([1, 2, 3, 4]));
+
+//=================================================================
+
+/* 
+
+BONUS Example 10: O(log n) Time - Sum Digits
+
+The following code sums the individual digits of a number. Runtime?
+
+NOTE: 
+Modulo Method
+To find 3 mod 10 using the Modulo Method, we first divide the Dividend (3) by the Divisor (10).
+
+Second, we multiply the Whole part of the Quotient in the previous step by the Divisor (10).
+
+Then finally, we subtract the answer in the second step from the Dividend (3) to get the answer. 
+Here is the math to illustrate how to get 3 mod 10 using our Modulo Method:
+
+3 / 10 = 0.3
+0 x 10 = 0
+3 - 0 = 3
+
+Thus, the answer to "What is 3 mod 10?" is 3.
+
+Let the length in number of digits be d? for a number that is d digits long, the number can have a possible value up to (but not including) d^10 (10,000, which is actually 9,999). We want to find n.
+
+If n = d^10, with circle method you see that d = log n.
+
+∴  O(log n) time.
+
+*/
+
+function sumDigits(n) {
+  let sum = 0;
+  while (n >= 1) {
+    sum += n % 10;
+    console.log('sum: ', sum);
+    n = Math.floor(n / 10);
+  }
+  return sum;
+}
+console.log('modddd', 3 % 10);
+console.log('sum of digits: ', sumDigits(345)); //12
+
+//=================================================================
