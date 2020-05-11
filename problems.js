@@ -509,3 +509,47 @@ function fibMemo(num, memo) {
 allFib(7);
 
 //=================================================================
+
+/* 
+
+Example 16: O(log N) Time - Print Powers of 2 from 1 to num
+
+Since we will call recursively every time we divide num in half, that leads us to log N time. 
+It does constant work on every call, so don't need to add any more N.
+
+*QUICK FACT: there are log N powers of 2 between 1 and N.
+
+Think about it another way: 
+Each time N doubles, the number of recursive calls to powersOf2 increases by 1. 
+The number of times you can double 1 until you get to N, matches the x in this equation: 
+
+2^x = n.
+
+∴  x = log N
+wow math.
+
+*/
+
+function powersOf2(num) {
+  if (num < 1) {
+    return 0;
+  } else if (num === 1) {
+    console.log('current = ', 1);
+    return 1;
+  } else {
+    let previous = powersOf2(Math.floor(num / 2));
+    // needs Math.floor or it will log everything as zeroes
+    let current = previous * 2;
+    console.log('current = ', current);
+    return current;
+  }
+}
+
+let usedNum = 32;
+let usedNum2 = 150;
+const try1 = powersOf2(usedNum);
+const try2 = powersOf2(usedNum2);
+console.log('try1 given ', usedNum, try1);
+console.log('try2 given ', usedNum2, try2);
+
+//=================================================================
