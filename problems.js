@@ -526,6 +526,7 @@ The number of times you can double 1 until you get to N, matches the x in this e
 2^x = n.
 
 ∴  x = log N
+
 wow math.
 
 */
