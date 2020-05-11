@@ -199,3 +199,48 @@ const reverseHalf = (arr) => {
 console.log('reverse half an array: ', reverseHalf([1, 2, 3, 4, 5, 6]));
 
 //=================================================================
+
+/* 
+
+Example 8: Multiple Choice:
+
+Which of the following are equivalent to O(N). Why?
+
+(o) - O(N + P), where P < N/2
+(o) - O(2N)
+(o) - O(N + log N)
+(x) - O(N + M)
+
+Explanations:
+
+- O(N + P), where P < N/2: N is the dominant term so we drop the P 
+- O(2N): drop the constant
+- O(N + log N): N is the dominant term, so drop log N
+
+- O(N + M): there is no established relationship between N and M so we must retain both variables in there
+
+*/
+
+//=================================================================
+
+/* 
+
+Example 9: O(a*s(log a + log s)) Time - an ugly, unreducable one
+
+Imagine an algorithm that takes an array of strings, and first it sorts the strings, and then sorts the full array. What is the runtime?
+
+Let s be the longest (worst case) string
+Let a be the array's length
+
+- Sorting each string takes O(s log s) time
+- Now we have to do that for every string. So O(a*s log s)
+- In order to sort all the strings, you have to compare them, which    takes O(s) time in the worse case. 
+- There are O(a log a) comparisons to make, so it takes O(s*a log a)
+- You have to add up the O(a*s log s) and O(s*a log a);
+
+You get O(a*s(log a + log s)). You cannot simplify it further.
+
+
+*/
+
+//=================================================================
