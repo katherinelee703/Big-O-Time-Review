@@ -98,3 +98,62 @@ function div(a, b) {
 console.log('division: ', div(33, 11)); // 3
 
 //=================================================================
+
+/* 
+
+BONUS Example 5: O(log(n)) Time - Square Root
+
+The following computes the integer squareroot of a number.
+If the number is not a perfect square (has no integer squareroot) then it returns -1. It does this by successive guessing.
+If n = 100, it first guesses 50. Too high? try lower - halfway between 1 and 50. What is the runtime?
+
+*/
+
+function squareroot(n) {
+  return sqrt_helper(n, 1, n);
+}
+
+function sqrt_helper(n, min, max) {
+  let guess = Math.floor((min + max) / 2);
+  if (guess * guess === n) {
+    // found it!!! (base case)
+    return guess;
+  } else if (guess * guess < n) {
+    // too low
+    console.log('sqrt guess: ', guess);
+    return sqrt_helper(n, guess + 1, max); // try higher
+  } else {
+    // too high
+    console.log('sqrt guess: ', guess);
+    return sqrt_helper(n, min, guess - 1); // try lower
+  }
+}
+
+console.log('squareroot: ', squareroot(121));
+
+//=================================================================
+
+/* 
+
+BONUS Example 6: O(√n) Time - Square Root Another Way
+
+The following computes the [integer] square root of a number. 
+If the number is not a perfect square (there is no integer square root), then it returns -1. 
+It does this by trying increasingly large numbers until it finds the right value (or is too high). 
+Runtime?
+
+*/
+
+function sqr_root(n) {
+  for (let guess = 1; guess * guess <= n; guess++) {
+    console.log('sqr_root guess: ', guess);
+    if (guess * guess === n) {
+      return guess;
+    }
+  }
+  return -1;
+}
+
+console.log('sqr_root: ', sqr_root(9));
+
+//=================================================================
